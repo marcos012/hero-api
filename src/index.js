@@ -1,21 +1,21 @@
 const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 require('dotenv/config');
 
-const app = express();
-
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-    res.send('ola');
-});
+const heroesRoute = require('./routes/heroes');
 
-app.get('/heroes', (req, res) => {
+app.use('/heroes', heroesRoute);
+
+app.get('/', (req, res) => {
     res.send('ola');
 });
 
 mongoose.connect(process.env.DB_CONNECTION,
     { useNewUrlParser: true },
     () => console.log('conectado'));
+
 app.listen(3000);
