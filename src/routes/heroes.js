@@ -2,15 +2,23 @@ const express = require('express');
 const router = express.Router();
 const Hero = require('../models/Hero');
 
-router.get('/', (req, res) => {
-    res.send('Pagina de heróis');
+router.get('/', async (req, res) => {
+    try {
+        const heroes = await Hero.find();
+        res.json(heroes);
+    } catch (err) {
+        res.json({ message: err });
+    }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const hero = new Hero(req.body);
-    hero.save()
-        .then(data => res.json({ mensagem: data }))
-        .catch(err => res.json({ erro: `Operation Invalid ${err}` }));
+    try {
+        const savedHero = await hero.save()
+        res.json(savedHero);
+    } catch (err) {
+        res.json({ message: err });
+    }
 });
 
 module.exports = router;
