@@ -20,7 +20,6 @@ $ npm start
 
 ### Author
 
-Marcos Paulo
 [marcos012](https://marcos012.github.io/site)
 
 ### Version
