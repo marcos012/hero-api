@@ -12,10 +12,6 @@ const heroesRoute = require('./routes/heroes');
 
 app.use('/heroes', heroesRoute);
 
-app.get('/', (req, res) => {
-    res.send('Hero API');
-});
-
 mongoose.connect(process.env.DB_CONNECTION,
     { useNewUrlParser: true },
     () => console.log('conectado'));
